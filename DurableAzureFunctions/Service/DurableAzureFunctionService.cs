@@ -23,16 +23,16 @@ namespace DurableAzureFunctions
         {
             var queryString = CreateQueryString(new[]
             {
-                KeyValuePair.Create("code", code ?? Code),
-                KeyValuePair.Create("taskHub", taskHub),
-                KeyValuePair.Create("connection", connection),
-                KeyValuePair.Create("createdTimeFrom", createdTimeFrom?.ToString("s", CultureInfo.InvariantCulture)),
-                KeyValuePair.Create("createdTimeTo", createdTimeTo?.ToString("s", CultureInfo.InvariantCulture)),
-                KeyValuePair.Create("runtimeStatus", runtimeStatus != null ? string.Join(",", runtimeStatus) : null),
-                KeyValuePair.Create("showInput", showInput?.ToString()),
-                KeyValuePair.Create("showHistory", showHistory?.ToString()),
-                KeyValuePair.Create("showHistoryOutput", showHistoryOutput?.ToString()),
-                KeyValuePair.Create("top", top?.ToString())
+                new KeyValuePair<string, string>("code", code ?? Code),
+                new KeyValuePair<string, string>("taskHub", taskHub),
+                new KeyValuePair<string, string>("connection", connection),
+                new KeyValuePair<string, string>("createdTimeFrom", createdTimeFrom?.ToString("s", CultureInfo.InvariantCulture)),
+                new KeyValuePair<string, string>("createdTimeTo", createdTimeTo?.ToString("s", CultureInfo.InvariantCulture)),
+                new KeyValuePair<string, string>("runtimeStatus", runtimeStatus != null ? string.Join(",", runtimeStatus) : null),
+                new KeyValuePair<string, string>("showInput", showInput?.ToString()),
+                new KeyValuePair<string, string>("showHistory", showHistory?.ToString()),
+                new KeyValuePair<string, string>("showHistoryOutput", showHistoryOutput?.ToString()),
+                new KeyValuePair<string, string>("top", top?.ToString())
             });
             
             return SendRequest<IEnumerable<InstanceStatus>>(HttpMethod.Get, $"{BaseUrl}/runtime/webhooks/durableTask/instances/{queryString}");
@@ -42,11 +42,11 @@ namespace DurableAzureFunctions
         {
             var queryString = CreateQueryString(new[]
             {
-                KeyValuePair.Create("code", code ?? Code),
-                KeyValuePair.Create("taskHub", taskHub),
-                KeyValuePair.Create("connection", connection),
-                KeyValuePair.Create("showHistory", showHistory?.ToString()),
-                KeyValuePair.Create("showHistoryOutput", showHistoryOutput?.ToString())
+                new KeyValuePair<string, string>("code", code ?? Code),
+                new KeyValuePair<string, string>("taskHub", taskHub),
+                new KeyValuePair<string, string>("connection", connection),
+                new KeyValuePair<string, string>("showHistory", showHistory?.ToString()),
+                new KeyValuePair<string, string>("showHistoryOutput", showHistoryOutput?.ToString())
             });
             
             return SendRequest<InstanceStatus>(HttpMethod.Get, $"{BaseUrl}/runtime/webhooks/durabletask/instances/{instanceId}{queryString}");
@@ -56,9 +56,9 @@ namespace DurableAzureFunctions
         {
             var queryString = CreateQueryString(new[]
             {
-                KeyValuePair.Create("code", code ?? Code),
-                KeyValuePair.Create("taskHub", taskHub),
-                KeyValuePair.Create("connection", connection)
+                new KeyValuePair<string, string>("code", code ?? Code),
+                new KeyValuePair<string, string>("taskHub", taskHub),
+                new KeyValuePair<string, string>("connection", connection)
             });
 
             return SendRequest(HttpMethod.Post, $"{BaseUrl}/runtime/webhooks/durabletask/instances/{instanceId}/raiseEvent/{eventName}{queryString}", eventContent);
@@ -68,10 +68,10 @@ namespace DurableAzureFunctions
         {
             var queryString = CreateQueryString(new[]
             {
-                KeyValuePair.Create("reason", reason),
-                KeyValuePair.Create("code", code ?? Code),
-                KeyValuePair.Create("taskHub", taskHub),
-                KeyValuePair.Create("connection", connection)
+                new KeyValuePair<string, string>("reason", reason),
+                new KeyValuePair<string, string>("code", code ?? Code),
+                new KeyValuePair<string, string>("taskHub", taskHub),
+                new KeyValuePair<string, string>("connection", connection)
             });
 
             return SendRequest(HttpMethod.Post, $"{BaseUrl}/runtime/webhooks/durabletask/instances/{instanceId}/rewind{queryString}");
@@ -81,10 +81,10 @@ namespace DurableAzureFunctions
         {
             var queryString = CreateQueryString(new[]
             {
-                KeyValuePair.Create("reason", reason),
-                KeyValuePair.Create("code", code ?? Code),
-                KeyValuePair.Create("taskHub", taskHub),
-                KeyValuePair.Create("connection", connection)
+                new KeyValuePair<string, string>("reason", reason),
+                new KeyValuePair<string, string>("code", code ?? Code),
+                new KeyValuePair<string, string>("taskHub", taskHub),
+                new KeyValuePair<string, string>("connection", connection)
             });
             
             return SendRequest(HttpMethod.Post, $"{BaseUrl}/runtime/webhooks/durabletask/instances/{instanceId}/terminate{queryString}");
